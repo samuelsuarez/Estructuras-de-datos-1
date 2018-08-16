@@ -1,0 +1,144 @@
+#include "stdafx.h"
+#include "iostream"
+#include "conio.h"
+
+using namespace std;
+
+const int MAX=500;
+class Lista
+{
+private:
+   int v[MAX];
+   int n;
+public:
+   Lista(){
+	  n=0;	  
+   }
+
+void setElem(int x,int p){
+   v[p]=x;
+}
+
+int getElem(int p){
+  return v[p];
+}
+
+void setDim(int d){
+  n=d;
+}
+
+int getDim(){
+  return n;
+}
+
+void leer();
+void imprimir();
+bool vacio()
+{ return n==0; }
+
+bool lleno()
+{ return n==MAX; }
+void eliminarUlt(int p)
+{ eliminar(n-1); }
+
+void insertar(int x,int p);
+void insertarUlt(int x)
+{ insertar(x,n); }
+
+void insertarPri(int x)
+{ insertar(x,0); }
+
+void eliminar(int p);
+
+void eliminarUlt()
+{ eliminar(n-1); }
+
+void eliminarPri()
+{ eliminar(0); }
+
+void eliminarRepetidos();
+void eliminarNoRepetidos();
+
+int cantVeces(int x){
+	int c=0,i=0;
+	while(i < n){
+	  if(v[i]==x)
+		  c=c + 1;
+	 i++;
+	}
+   return c;
+}
+
+void metBurbuja ()
+{
+	int aux;
+	for (int i=0;i<getDim();i++)
+	{
+		for(int j=0;j<getDim();j++)
+		{
+			if (v[i]<v[j])
+			{
+				aux=v[j];
+			    v[j]=v[i];
+				v[i]=aux;
+			}
+		}
+	}
+}
+
+void metInsercion ()
+{
+	int pos,aux;
+	for (int i=0;i<getDim();i++)
+	{
+		pos=i;
+		aux=v[i];
+		while (pos>0 && v[pos-1]>aux)
+		{
+			v[pos]=v[pos-1];
+			pos--;
+		}
+		v[pos]=aux;
+	}
+}
+
+void metQuicksort ()
+{
+	int medio,pivote;
+	medio=getDim() / 2;
+	pivote=v[medio];
+
+}
+
+
+}; //end class
+
+void Lista::leer()
+{
+	int m;
+	cout<<"Cantidad elementos:";
+	cin>>m; int x;
+	setDim(m);
+	for(int i=0;i<m;i++){
+	  cout<<"Elem:"; cin>>x;
+	  setElem(x,i);
+	}
+}
+
+void Lista::imprimir()
+{
+	for(int i=0;i<getDim();i++) {
+	  cout<<getElem(i)<<"  ";
+	}
+	cout<<endl;
+}
+
+void main()
+{
+	Lista L1;
+	L1.leer();
+	L1.imprimir();
+	L1.metInsercion();
+	L1.imprimir();
+	getch();
+}
